@@ -1,21 +1,18 @@
 #include<iostream>
 using namespace std;
 
-void SelectSort(int array[], int length)
+void InsertSort(int array[], int length)
 {
-    if (array == nullptr || length==0)
+    if (array == nullptr || length == 0)
         return;
-    for (int i = 0; i < length-1;++i)
+    for (int i = 1; i < length; ++i)
     {
-        int min = i;
-        for (int j = i + 1; j < length; ++j)
+        int j,temp = array[i];
+        for (j = i; j > 0 && array[j-1]>temp; --j)
         {
-            if (array[min]>array[j])
-                min = j;
+            array[j] = array[j - 1];
         }
-        int temp = array[i];
-        array[i] = array[min];
-        array[min] = temp;
+        array[j] = temp;
     }
 }
 
@@ -34,8 +31,8 @@ void Test(int array[], int length)
         else
             cout << array[i] << ", ";
     }
-    SelectSort(array, length);
-    cout << "After select sort, the array is [ ";
+    InsertSort(array, length);
+    cout << "After insert sort, the array is [ ";
     for (int i = 0; i < length; ++i)
     {
         if (i == length - 1)
