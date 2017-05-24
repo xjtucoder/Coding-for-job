@@ -1,21 +1,34 @@
 
-//时间复杂度： 平均O(n2),最坏O(n2), 稳定
+//时间复杂度： 平均O(nlogn),最坏O(nlogn), 稳定
 #include<iostream>
 using namespace std;
 
-void BubbleSort(int array[], int length)
+void Merge(int array[], int tempArr[], int start, int mid, int end)
 {
-    if (array == nullptr || length==0)
-        return;
-    for (int i = 0; i < length-1;++i)
+    int i = start, j = mid + 1, k = start;
+    while (i != mid + 1 && j != end + 1)
     {
-        for (int j = 0; j < length-1-i;++j)
-        if (array[j] > array[j + 1])
-        {
-            int temp = array[j];
-            array[j] = array[j + 1];
-            array[j + 1] = temp;
-        }
+        if (array[i] > array[j])
+            tempArr[k++] = array[j++];
+        else
+            tempArr[k++] = array[i++];
+    }
+    while (i != mid + 1)
+        tempArr[k++] = array[i++];
+    while (j != end + 1)
+        tempArr[k++] = array[j++];
+    for (i = start; i <= end; i++)
+        array[i] = tempArr[i];
+}
+void MergeSort(int array[], int tempArr[], int start, int end)
+{
+    int mid;
+    if (start < end)
+    {
+        mid = (start + end) / 2;
+        MergeSort(array, tempArr, start, mid);
+        MergeSort(array, tempArr, mid + 1, end);
+        Merge(array, tempArr, start, mid, end);
     }
 }
 
@@ -34,8 +47,9 @@ void Test(int array[], int length)
         else
             cout << array[i] << ", ";
     }
-    BubbleSort(array, length);
-    cout << "After buble sort, the array is [ ";
+    int temp[10];
+    MergeSort(array, temp, 0, length-1);
+    cout << "After merge sort, the array is [ ";
     for (int i = 0; i < length; ++i)
     {
         if (i == length - 1)
