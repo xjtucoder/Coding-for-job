@@ -1,5 +1,6 @@
-
-//快速排序，时间复杂度 平均O(n2)，最坏O(n2)
+//快速排序，不稳定
+//时间复杂度，平均O(n2)，最坏O(n2)
+//空间复杂度，O(1)
 #include<iostream>
 using namespace std;
 

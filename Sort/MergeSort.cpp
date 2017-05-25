@@ -1,5 +1,6 @@
-
-//时间复杂度： 平均O(nlogn),最坏O(nlogn), 稳定
+//归并排序, 稳定
+//时间复杂度，平均O(nlogn),最坏O(nlogn)
+//空间复杂度，O(n)
 #include<iostream>
 using namespace std;
 

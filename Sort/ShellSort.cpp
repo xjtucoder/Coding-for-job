@@ -1,4 +1,6 @@
-//希尔排序，时间复杂度，平均O(n1.3)，最坏O(n2)
+//希尔排序，不稳定
+//时间复杂度，平均O(n1.3)，最坏O(n2)
+//空间复杂度，O(1)
 #include<iostream>
 using namespace std;
 
