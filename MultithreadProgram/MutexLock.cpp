@@ -5,16 +5,18 @@ using namespace std;
 #define NUM_THREADS 5
 int sum = 0; //定义全局变量，让所有线程同时写，这样就需要锁机制
 pthread_mutex_t sum_mutex; //互斥锁
+
 void* say_hello( void* args )
 {
     cout << "hello in thread " << *(( int * )args) << endl;
-    pthread_mutex_lock( &sum_mutex ); //先加锁，再修改sum的值，锁被占用就阻塞，直到拿到锁再修改sum;
+    //pthread_mutex_lock( &sum_mutex ); //先加锁，再修改sum的值，锁被占用就阻塞，直到拿到锁再修改sum;
     cout << "before sum is " << sum << " in thread " << *( ( int* )args ) << endl;
     sum += *( ( int* )args );
     cout << "after sum is " << sum << " in thread " << *( ( int* )args ) << endl;
-    pthread_mutex_unlock( &sum_mutex ); //释放锁，供其他线程使用
+    //pthread_mutex_unlock( &sum_mutex ); //释放锁，供其他线程使用
     pthread_exit( 0 );
 }
+
 int main()
 {
     pthread_t tids[NUM_THREADS];
@@ -24,6 +26,7 @@ int main()
     pthread_attr_setdetachstate( &attr, PTHREAD_CREATE_JOINABLE ); //是设置你想要指定线程属性参数，这个参数表明这个线程是可以join连接的，
     //join功能表示主程序可以等线程结束后再去做某事，实现了主程序和线程同步功能
     pthread_mutex_init( &sum_mutex, NULL ); //对锁进行初始化
+    
     for( int i = 0; i < NUM_THREADS; ++i )
     {
         indexes[i] = i;
@@ -33,6 +36,7 @@ int main()
             cout << "pthread_create error:error_code=" << ret << endl;
         }
     }
+    
     pthread_attr_destroy( &attr ); //释放内存
     void *status;
     for( int i = 0; i < NUM_THREADS; ++i )
