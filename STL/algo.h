@@ -11,6 +11,7 @@
 #include<functional>
 #include<numeric>
 #include<algorithm>
+#include<iterator>
 
 // Print function
 template <class T>

@@ -77,4 +77,49 @@ int main()
         cout << "coll 1st even number is " << *find_if(coll.begin(), coll.end(), isEven<int>) << endl;
     else
         cout << "coll has no even number!" << endl;
+
+    // search_n
+    auto pos = search_n(coll.begin(), coll.end(), 4, 23, greater<int>());
+    if(pos != coll.end())
+        cout << "4 consecutive elements with value > 23 start with " << *pos << endl;
+    else
+        cout << "coll no have!" << endl;
+
+    // find_first_of
+    vector<int> searchcoll;
+    INSERT_ELEMENTS(searchcoll, 21, 23);
+    pos = find_first_of(coll.begin(), coll.end(), searchcoll.begin(), searchcoll.end());
+    cout << "first in 21-23 is " << *pos << endl;
+
+    // copy
+    copy(coll.begin(), coll.end(), ostream_iterator<int>(cout, " "));
+    cout << endl;
+
+    // fill_n
+    fill_n(coll.end()-2, 2, 31);
+    copy(coll.begin(), coll.end(), ostream_iterator<int>(cout, " "));
+    cout << endl;
+
+    // replace 
+    replace(coll.begin(), coll.end(), 25, 55);
+    copy(coll.begin(), coll.end(), ostream_iterator<int>(cout, " "));
+    cout << endl;
+
+    // unique
+    unique(coll.begin(), coll.end());
+    copy(coll.begin(), coll.end(), ostream_iterator<int>(cout, " "));
+    cout << endl;
+
+    // remove
+    remove(coll.begin(), coll.end(), 22);
+    copy(coll.begin(), coll.end(), ostream_iterator<int>(cout, " "));
+    cout << endl;
+    coll.erase(remove_if(coll.begin(), coll.end(), bind2nd(greater<int>(), 30)), coll.end());
+    copy(coll.begin(), coll.end(), ostream_iterator<int>(cout, " "));
+    cout << endl;
+
+    // reverse
+    vector<int> coll2;
+    reverse_copy(coll.begin(), coll.end(), ostream_iterator<int>(cout, " "));
+    cout << endl;
 }
