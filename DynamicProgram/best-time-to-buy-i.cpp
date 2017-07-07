@@ -3,7 +3,7 @@
 class Solution {
 public:
     int maxProfit(vector<int> &prices) {
-
+	if(prices.empty()) return 0;
         int valley=prices[0];
         int result=0;
         for(int i=1;i<prices.size();++i)
