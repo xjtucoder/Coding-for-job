@@ -1,5 +1,7 @@
 // leetcode triangle
 // time O(n2), space O(1)
+// DP from bottom to top
+// state transition equation: f(i,j) = min{f(i+1,j), f(i+1,j+1)} + (i,j)
 class Solution {
 public:
     int minimumTotal(vector<vector<int>>& triangle) {
